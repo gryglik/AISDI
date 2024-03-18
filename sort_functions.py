@@ -1,4 +1,7 @@
-def selection_sort(s_list: list):
+from typing import Any
+
+
+def selection_sort(s_list: list[Any]) -> list[Any]:
     sorted_list = s_list[:]
     n = len(sorted_list)
     for i in range(0, n - 1):
