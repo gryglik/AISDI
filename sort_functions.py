@@ -13,3 +13,17 @@ def selection_sort(s_list: list[Any]) -> list[Any]:
         sorted_list[i] = sorted_list[idx_min]
         sorted_list[idx_min] = val_temp
     return sorted_list
+
+
+def bubble_sort(given_list: list[Any]) -> list[Any]:
+    s_list = given_list[:]
+    n = len(s_list)
+    for i in range(0, n - 1):
+        sorted = True
+        for j in range(0, n-i-1):
+            if s_list[j] > s_list[j+1]:
+                s_list[j], s_list[j+1] = s_list[j+1], s_list[j]
+                sorted = False
+        if sorted is True:
+            break
+    return s_list
