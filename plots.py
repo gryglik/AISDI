@@ -99,4 +99,5 @@ plt.plot([element for element, time in data_quick_sort],
 plt.legend([
     'bubble sort', 'selection sort', 'insertion sort',
     'merge sort', 'quick sort'])
+plt.savefig('plots/compared_sort.png')
 plt.show()
