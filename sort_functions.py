@@ -44,6 +44,53 @@ def insertion_sort(given_list: list[Any]) -> list[Any]:
     return s_list
 
 
+def bubble_sort(given_list: list[Any]) -> list[Any]:
+    s_list = given_list[:]
+    n = len(s_list)
+    for i in range(0, n - 1):
+        sorted = True
+        for j in range(0, n-i-1):
+            if s_list[j] > s_list[j+1]:
+                s_list[j], s_list[j+1] = s_list[j+1], s_list[j]
+                sorted = False
+        if sorted is True:
+            break
+    return s_list
+
+
+def merge(left: list[Any], right: list[Any]) -> list[Any]:
+    sorted = [None] * (len(left) + len(right))
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            sorted[i + j] = left[i]
+            i += 1
+        else:
+            sorted[i + j] = right[j]
+            j += 1
+
+    if i >= len(left):
+        while j < len(right):
+            sorted[i + j] = right[j]
+            j += 1
+    else:
+        while i < len(left):
+            sorted[i + j] = left[i]
+            i += 1
+    return sorted
+
+
+def merge_sort(given_list: list[Any]) -> list[Any]:
+    s_list = given_list[:]
+    n = len(s_list)
+    pivot = n // 2
+    if pivot > 0:
+        left = merge_sort(s_list[:pivot])
+        right = merge_sort(s_list[pivot:])
+        return merge(left, right)
+    return s_list
+
+
 def partition(s_list: list[Any], start: int, end:  int) -> int:
     pivot = s_list[end]
     i = start - 1
