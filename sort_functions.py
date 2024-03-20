@@ -44,20 +44,6 @@ def insertion_sort(given_list: list[Any]) -> list[Any]:
     return s_list
 
 
-def bubble_sort(given_list: list[Any]) -> list[Any]:
-    s_list = given_list[:]
-    n = len(s_list)
-    for i in range(0, n - 1):
-        sorted = True
-        for j in range(0, n-i-1):
-            if s_list[j] > s_list[j+1]:
-                s_list[j], s_list[j+1] = s_list[j+1], s_list[j]
-                sorted = False
-        if sorted is True:
-            break
-    return s_list
-
-
 def merge(left: list[Any], right: list[Any]) -> list[Any]:
     sorted = [None] * (len(left) + len(right))
     i = j = 0
