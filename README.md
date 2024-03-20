@@ -1,5 +1,5 @@
 # AISDI sort
-
+Run [plots.py](plots.py) module
 
 
 ## Getting started
