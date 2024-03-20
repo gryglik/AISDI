@@ -3,15 +3,18 @@ import gc
 import random
 import json
 from matplotlib import pyplot as plt
-from typing import Callable, Any
+from typing import TypeAlias, Callable, Any
 
-from sort_functions import selection_sort, bubble_sort, quick_sort, insertion_sort
+from sort_functions import (
+    selection_sort, bubble_sort, quick_sort, insertion_sort)
 
 SORTING_FILE = 'pan-tadeusz-unix.txt'
 
+f_sort: TypeAlias = Callable[[list[Any]], list[Any]]
+time_stat: TypeAlias = tuple[int, float]
 
-def measure_sorting_time(
-        sort_func: Callable[[list[Any]], list[Any]]) -> list[tuple[int, float]]:
+
+def measure_sorting_time(sort_func: f_sort) -> list[time_stat]:
     with open(SORTING_FILE, 'r') as fp:
         text = []
         while len(text) < 10000:
