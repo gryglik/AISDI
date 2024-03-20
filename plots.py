@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from typing import TypeAlias, Callable, Any
 
 from sort_functions import (
-    selection_sort, bubble_sort, quick_sort, insertion_sort)
+    selection_sort, bubble_sort, quick_sort, insertion_sort, merge_sort)
 
 SORTING_FILE = 'pan-tadeusz-unix.txt'
 
@@ -60,20 +60,24 @@ def plot(data: list[tuple[int, float]], title: str) -> None:
     plt.savefig('plots/' + title + '.png')
 
 
+print('Started measuring, it may take up to 5 mins ...')
 data_bubble_sort = measure_sorting_time(bubble_sort)
 data_selection_sort = measure_sorting_time(selection_sort)
 data_insertion_sort = measure_sorting_time(insertion_sort)
+data_merge_sort = measure_sorting_time(merge_sort)
 data_quick_sort = measure_sorting_time(quick_sort)
 
 with open('stats.json', 'w') as fp:
     json.dump(('bubble_sort', data_bubble_sort), fp, indent=4)
     json.dump(('selection_sort', data_selection_sort), fp, indent=4)
     json.dump(('insertion_sort', data_insertion_sort), fp, indent=4)
+    json.dump(('merge_sort', data_merge_sort), fp, indent=4)
     json.dump(('quick_sort', data_quick_sort), fp, indent=4)
 
 plot(data_bubble_sort, 'bubble_sort')
 plot(data_selection_sort, 'selection_sort')
 plot(data_insertion_sort, 'insertion_sort')
+plot(data_merge_sort, 'merge_sort')
 plot(data_quick_sort, 'quick_sort')
 
 plt.clf()
@@ -88,7 +92,11 @@ plt.plot([element for element, time in data_selection_sort],
          [time for element, time in data_selection_sort])
 plt.plot([element for element, time in data_insertion_sort],
          [time for element, time in data_insertion_sort])
+plt.plot([element for element, time in data_merge_sort],
+         [time for element, time in data_merge_sort])
 plt.plot([element for element, time in data_quick_sort],
          [time for element, time in data_quick_sort])
-plt.legend(['bubble sort', 'selection sort', 'insertion sort', 'quick sort'])
+plt.legend([
+    'bubble sort', 'selection sort', 'insertion sort',
+    'merge sort', 'quick sort'])
 plt.show()
