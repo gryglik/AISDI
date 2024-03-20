@@ -15,6 +15,34 @@ def selection_sort(s_list: list[Any]) -> list[Any]:
     return sorted_list
 
 
+def insertion_sort(given_list: list[Any]) -> list[Any]:
+    s_list = given_list[:]
+    n = len(s_list)
+    for i in range(1, n):
+        element = s_list[i]
+        j = i - 1
+
+        while j >= 0 and s_list[j] > element:
+            s_list[j+1] = s_list[j]
+            j -= 1
+
+        s_list[j+1] = element
+    return s_list
+
+def bubble_sort(given_list: list[Any]) -> list[Any]:
+    s_list = given_list[:]
+    n = len(s_list)
+    for i in range(0, n - 1):
+        sorted = True
+        for j in range(0, n-i-1):
+            if s_list[j] > s_list[j+1]:
+                s_list[j], s_list[j+1] = s_list[j+1], s_list[j]
+                sorted = False
+        if sorted is True:
+            break
+    return s_list
+
+
 def partition(s_list: list[Any], start: int, end:  int) -> int:
     pivot = s_list[end]
     i = start - 1
