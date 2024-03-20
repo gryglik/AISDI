@@ -27,6 +27,7 @@ def insertion_sort(given_list: list[Any]) -> list[Any]:
             j -= 1
 
         s_list[j+1] = element
+    return s_list
 
 def bubble_sort(given_list: list[Any]) -> list[Any]:
     s_list = given_list[:]

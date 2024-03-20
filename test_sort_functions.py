@@ -31,9 +31,6 @@ def test_selection_sort_strings():
 def test_insertion_sort_typical():
     list_1 = [2, 1, 3, 1, 4, 7, 3]
     sorted = insertion_sort(list_1)
-def test_bubble_sort_typical():
-    list_1 = [2, 1, 3, 1, 4, 7, 3]
-    sorted = bubble_sort(list_1)
     assert sorted == [1, 1, 2, 3, 3, 4, 7]
     assert list_1 == [2, 1, 3, 1, 4, 7, 3]
 
@@ -67,6 +64,16 @@ def test_insertion_sort_chars():
 def test_insertion_sort_strings():
     list_1 = ['zyx', 'xyz', 'abbc', 'xzy', 'abc', 'aabc']
     sorted = insertion_sort(list_1)
+    assert sorted == ['aabc', 'abbc', 'abc', 'xyz', 'xzy', 'zyx']
+    
+
+def test_bubble_sort_typical():
+    list_1 = [2, 1, 3, 1, 4, 7, 3]
+    sorted = bubble_sort(list_1)
+    assert sorted == [1, 1, 2, 3, 3, 4, 7]
+    assert list_1 == [2, 1, 3, 1, 4, 7, 3]
+
+
 def test_bubble_sort_tricky():
     list_1 = [9, 1, 3, 1, 4, 7, -1]
     sorted = bubble_sort(list_1)
