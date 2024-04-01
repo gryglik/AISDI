@@ -1,4 +1,4 @@
-from heap import heapify, make_heap
+from heap import heapify, make_heap, add
 
 
 def test_heapify_2_a_typical():
@@ -70,3 +70,11 @@ def test_make_heap_2_a_typical():
     T = [None, 1, 2, 3, 7, 8, 9, 4, 5, 10, 12]
     make_heap(2, T)
     assert T == [None, 12, 10, 9, 7, 8, 3, 4, 5, 1, 2]
+
+
+def test_add_2_a_typical():
+    T = [None, 1, 2, 3, 7, 8, 9, 4, 5, 10, 12]
+    make_heap(2, T)
+    assert T == [None, 12, 10, 9, 7, 8, 3, 4, 5, 1, 2]
+    add(2, 11, T)
+    assert T == [None, 12, 11, 9, 7, 10, 3, 4, 5, 1, 2, 8]

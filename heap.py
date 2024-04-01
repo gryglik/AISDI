@@ -21,7 +21,13 @@ def make_heap(k: int, T: list[int]) -> None:
         heapify(k, i, T)
 
 
-# def add(k: int, new_item: int, T:list[int]) -> None:
-#     T.append(new_item)
-#     length = len(T) - 1
-#     parent = 1 + (length - 2) // k
+def add(k: int, new_item: int, T: list[int]) -> None:
+    T.append(new_item)
+    length = len(T) - 1
+    i_item = length
+    i_parent = 1 + (i_item - 2) // k
+    while T[i_item] > T[i_parent] and not i_item == 1:
+        T[i_item] = T[i_parent]
+        T[i_parent] = new_item
+        i_item = i_parent
+        i_parent = 1 + (i_item - 2) // k
