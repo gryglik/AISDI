@@ -19,3 +19,9 @@ def make_heap(k: int, T: list[int]) -> None:
     length = len(T) - 1
     for i in range(1 + (length - 2) // k, 0, -1):
         heapify(k, i, T)
+
+
+# def add(k: int, new_item: int, T:list[int]) -> None:
+#     T.append(new_item)
+#     length = len(T) - 1
+#     parent = 1 + (length - 2) // k
