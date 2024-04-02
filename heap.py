@@ -1,5 +1,13 @@
 class Heap():
     def __init__(self, a: int = 2, T: list[int | None] = []) -> None:
+        """
+        Creates an instance of the heap and make heap from given list
+
+        Args:
+            a (int, optional): a-ary heap. Defaults to 2.
+            T (list[int  |  None], optional): List of keys to create heap.
+                Defaults to []. Can be either with T[0] == int or T[0] == None.
+        """
         self._a: int = a
         if T[0]:
             self._T: list[int | None] = [None] + T[:]
@@ -8,37 +16,95 @@ class Heap():
         self._make_heap()
 
     def list(self) -> list[int | None]:
+        """
+        Returns list of elements in heap with None
+
+        Returns:
+            list[int | None]: List of elements in heap.
+        """
         return self._T[:]
 
     def len(self) -> int:
-        return len(self._T) - 1  # bez None
+        """
+        Returns length of heap without None
+
+        Returns:
+            int: Returns length of heap
+        """
+        return len(self._T) - 1
 
     def right(self, n: int) -> int | None:
-        # ostatnie dziecko danego rodzica znajduje się pod indeksem
-        # n * a + 1 - przesunięcie w prawo
+        """
+        Returns index of last child of given parent.
+
+        Last child of given parent is located at index:
+        n * a + 1 (+ 1 move to right).
+
+        Args:
+            n (int): parent index
+
+        Returns:
+            int | None: last child index or None if no child
+        """
         right = n * self._a + 1 if n * self._a + 1 <= self.len() else self.len()
         return right if right <= self.len() else None
 
     def left(self, n: int) -> int | None:
-        # pierwsze dziecko danego rodzica znajduje się pod indeksem
-        # right() - (a - 1) = n * a + 1 - (a - 1) = (n - 1) * a + 2
+        """
+        Returns index of first child of given parent
+
+        First child of given parent is located at index
+        right() - (a - 1) = n * a + 1 - (a - 1) = (n - 1) * a + 2
+
+        Args:
+            n (int): parent index
+
+        Returns:
+            int | None: first child index or None if no child
+        """
         return (n - 1) * self._a + 2 if (n - 1) * self._a + 2 <= self.len() else None
 
     def parent(self, n: int) -> int | None:
+        """
+        Returns index of parent of given child or None if no parent.
+
+        children indexes are:
+            [(x - 1) * a + 2, x * a + 1]
+        to get parent index (x) we have to:
+            1) shift children indexes by (a - 2)
+                then chlildren indexes are [x * a, (x + 1) * a - 1]
+            2) divide them by degree of heap (a)
+
+        Args:
+            n (int): index of child
+
+        Returns:
+            int | None: index of parent
+        """
         if n == 1:
             return None
-        # indeksy dzieci [(x - 1) * a + 2, x * a + 1], więc aby uzyskać
-        # indeks rodzica x należy przesunąć indeksy dzieci o +(a - 2)
-        # wtedy przesunięte indeksy dzieci [x * a, (x + 1) * a - 1]
-        # dzielone przez stopień kopca (a) daje indeks rodzica (x)
         return (n + self._a - 2) // self._a
 
     def _swap(self, i: int, j: int) -> None:
+        """
+        Swaps two keys in heap.
+
+        Args:
+            i (int): first index
+            j (int): second index
+        """
         temp = self._T[i]
         self._T[i] = self._T[j]
         self._T[j] = temp
 
     def _heapify(self, n: int) -> None:
+        """
+        Creates a heap for given apex(n) provided that
+        children of n are also heaps.
+
+        Args:
+            n (int): index of apex
+        """
         if self.left(n):
             i_max = self.left(n)
             for i in range(self.left(n) + 1, self.right(n) + 1):
@@ -49,10 +115,23 @@ class Heap():
                 self._heapify(i_max)
 
     def _make_heap(self) -> None:
+        """
+        Creates heap by doing heapify starting from last node (not leaf)
+
+        After every 7th element new node is created starting from 2nd, that's
+        why  (length - 2) // a increases when new node is created, we need to
+        add 1 becouse heap always has at least 1 node.
+        """
         for i in range(1 + (self.len() - 2) // self._a, 0, -1):
             self._heapify(i)
 
     def add(self, new_item: int) -> None:
+        """
+        Adds new item to heap and fix it.
+
+        Args:
+            new_item (int): new item key.
+        """
         self._T.append(new_item)
         i_item = self.len()
         i_parent = self.parent(i_item)
