@@ -11,7 +11,7 @@ class Heap():
         return self._T[:]
 
     def len(self) -> int:
-        return len(self._T) - 1 # bez None
+        return len(self._T) - 1  # bez None
 
     def right(self, n: int) -> int | None:
         # ostatnie dziecko danego rodzica znajduje się pod indeksem
