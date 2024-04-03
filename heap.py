@@ -1,3 +1,5 @@
+import math
+
 class Heap():
     def __init__(self, a: int = 2, T: list[int | None] = []) -> None:
         """
@@ -139,3 +141,44 @@ class Heap():
             self._swap(i_item, i_parent)
             i_item = i_parent
             i_parent = self.parent(i_item)
+
+    def remove_root(self) -> None:
+        """
+        To remove the root:
+        * swap root with the last_element
+        * delete root (right now last element of a list)
+        * heapify make right heap again from root 
+        """
+        self._swap(1, self.len())
+        self._T.pop()
+        self._heapify(1)
+
+    def level(self) -> int:
+        """
+        Compute the how many levels heap have from this formula
+        Sum of geometric series
+        Sn = (1 - a^n)/(1-a) ->
+        Sn(1-a) = (1 - a^n) ->
+        a^n = Sn(a-1) + 1
+        n = loga(Sn(a-1)+1)
+        Sn - amount of elements for full heap
+        a - a-ary heap how many childs node have
+        n - how many levels tree have
+        We have a and Sn(self._len) so we compute ~n
+        """
+        formula = (self._a-1) * self.len() + 1
+
+        # Obliczenie logarytmu o podstawie x
+        level = math.log(formula) / math.log(self._a)
+        return math.ceil(level)
+
+    def print(self) -> None:
+        spaces = self._a ** (self.level() - 1)
+        count = 1
+        first_in_row = 1
+        while (first_in_row <= self.len()):
+            end_in_row = min(first_in_row+count, self.len()+1)
+            print(' '*int(spaces) + str(self._T[first_in_row:end_in_row]))
+            first_in_row += count
+            count *= self._a
+            spaces -= math.ceil(count)
