@@ -147,7 +147,7 @@ class Heap():
         To remove the root:
         * swap root with the last_element
         * delete root (right now last element of a list)
-        * heapify make right heap again from root 
+        * heapify make right heap again from root
         """
         self._swap(1, self.len())
         self._T.pop()
