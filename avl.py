@@ -86,3 +86,41 @@ class AVLNode():
             return self.left.search(key) if self.left else None
         else:
             return self.right.search(key) if self.right else None
+
+    def print(self) -> None:
+        queue = [self]
+        for node in queue:
+            queue.append(node.left if node else None)
+            queue.append(node.right if node else None)
+            if len(queue) == pow(2, self.h) - 1:
+                break
+
+        for level in range(0, self.h):
+            spacing = pow(2, self.h - level + 1)
+            s = ' ' * spacing
+
+            struct = ' ' * (spacing + spacing // 2)
+            k = 0
+            for element in range(0, pow(2, level)):
+                node = queue.pop(0)
+
+                if k % 2 == 0:
+                    if node:
+                        struct += '/'
+                    else:
+                        struct += " "
+                    struct += ' ' * (spacing - 1)
+                    s += " " if not node else str(node.key)
+                    s += " " * (2 * spacing - 1)
+                else:
+                    if node:
+                        struct += chr(92)
+                    else:
+                        struct += " "
+                    struct += ' ' * (3 * spacing - 1)
+                    s += " " if not node else str(node.key)
+                    s += " " * (2 * spacing - 1)
+                k += 1
+            if level > 0:
+                print(struct)
+            print(s)

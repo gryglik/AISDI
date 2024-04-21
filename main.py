@@ -1,5 +1,6 @@
-from bst import BST
+from avl import AVLNode
 
-my_tree = BST([8])
 
-my_tree.add_key(1)
+avl_root = AVLNode()
+avl_root = avl_root.add_list([1, 2, 3, 4, 5, 6, 7, 8, 9])
+avl_root.print()
