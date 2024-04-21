@@ -84,16 +84,16 @@ def measure_remove_bst(input_list: list[int]):
     return time_stats
 
 
-input_list = [
-    random.randint(1, 30000) for i in range(0, 10000)]
-# input_list = []
-# input_set = set()
-# while len(input_list) < 10000:
-#     new_key = random.randint(1, 30000)
+# input_list = [
+#     random.randint(1, 30000) for i in range(0, 10000)]
+input_list = []
+input_set = set()
+while len(input_list) < 10000:
+    new_key = random.randint(1, 30000)
 
-#     if new_key not in input_set:
-#         input_set.add(new_key)
-#         input_list.append(new_key)
+    if new_key not in input_set:
+        input_set.add(new_key)
+        input_list.append(new_key)
 
 time.sleep(10)  # czas na załadowanie bibliotek
 data_make_bst = measure_make_bst(input_list)
