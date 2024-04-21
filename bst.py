@@ -67,3 +67,46 @@ class BST():
 
     def size(self) -> int:
         return len(self.nodes)
+
+    def height(self, node: Node | None) -> int:
+        if not node:
+            return 0
+        return 1 + max(self.height(node.left), self.height(node.right))
+
+    def print(self) -> None:
+        queue = [self.root]
+        for node in queue:
+            queue.append(node.left if node else None)
+            queue.append(node.right if node else None)
+            if len(queue) == pow(2, self.height(self.root)) - 1:
+                break
+
+        for level in range(0, self.height(self.root)):
+            spacing = pow(2, self.height(self.root) - level + 1)
+            s = ' ' * spacing
+
+            struct = ' ' * (spacing + spacing // 2)
+            k = 0
+            for element in range(0, pow(2, level)):
+                node = queue.pop(0)
+
+                if k % 2 == 0:
+                    if node:
+                        struct += '/'
+                    else:
+                        struct += " "
+                    struct += ' ' * (spacing - 1)
+                    s += " " if not node else str(node.key)
+                    s += " " * (2 * spacing - 1)
+                else:
+                    if node:
+                        struct += chr(92)
+                    else:
+                        struct += " "
+                    struct += ' ' * (3 * spacing - 1)
+                    s += " " if not node else str(node.key)
+                    s += " " * (2 * spacing - 1)
+                k += 1
+            if level > 0:
+                print(struct)
+            print(s)
