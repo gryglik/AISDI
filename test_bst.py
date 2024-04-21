@@ -46,8 +46,10 @@ def test_create_full_tree():
     assert my_tree.root.right.key == 13
     assert my_tree.root.key == 8
 
-    assert my_tree.root.left.right.key == 4
-    assert my_tree.root.left.right.right.key == 5
+    assert my_tree.root.left.right.key == 6
+    assert my_tree.root.left.left.key == 3
+    assert my_tree.root.right.left.key == 10
+    assert my_tree.root.right.right.key == 16
 
 
 def test_search_full_tree():
