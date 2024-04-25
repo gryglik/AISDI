@@ -4,3 +4,5 @@
 [zad_2 branch](https://gitlab-stud.elka.pw.edu.pl/mgryglic/aisdi-sort/-/tree/zad_2)
 ### Sortowanie zad_3
 [zad_3 branch](https://gitlab-stud.elka.pw.edu.pl/mgryglic/aisdi-sort/-/tree/zad_3)
+### Sortowanie zad_4
+[zad_4 branch](https://gitlab-stud.elka.pw.edu.pl/mgryglic/aisdi-sort/-/tree/zad_4)
