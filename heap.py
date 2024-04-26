@@ -143,7 +143,7 @@ class Heap():
             i_item = i_parent
             i_parent = self.parent(i_item)
 
-    def remove_root(self) -> None:
+    def remove_root(self) -> int:
         """
         To remove the root:
         * swap root with the last_element
@@ -151,8 +151,9 @@ class Heap():
         * heapify make right heap again from root
         """
         self._swap(1, self.len())
-        self._T.pop()
+        root = self._T.pop()
         self._heapify(1)
+        return root
 
     def level(self) -> int:
         """
