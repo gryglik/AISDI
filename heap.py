@@ -1,8 +1,9 @@
 import math
+from typing import Any
 
 
 class Heap():
-    def __init__(self, a: int = 2, T: list[int | None] = []) -> None:
+    def __init__(self, a: int = 2, T: list[Any | None] = []) -> None:
         """
         Creates an instance of the heap and make heap from given list
 
@@ -25,7 +26,7 @@ class Heap():
         Returns:
             list[int | None]: List of elements in heap.
         """
-        return self._T[:]
+        return self._T[1:]
 
     def len(self) -> int:
         """
@@ -109,13 +110,13 @@ class Heap():
             n (int): index of apex
         """
         if self.left(n):
-            i_max = self.left(n)
+            i_min = self.left(n)
             for i in range(self.left(n) + 1, self.right(n) + 1):
-                if self._T[i] > self._T[i_max]:
-                    i_max = i
-            if self._T[i_max] > self._T[n]:
-                self._swap(i_max, n)
-                self._heapify(i_max)
+                if self._T[i] < self._T[i_min]:
+                    i_min = i
+            if self._T[i_min] < self._T[n]:
+                self._swap(i_min, n)
+                self._heapify(i_min)
 
     def _make_heap(self) -> None:
         """
@@ -138,12 +139,12 @@ class Heap():
         self._T.append(new_item)
         i_item = self.len()
         i_parent = self.parent(i_item)
-        while i_parent and self._T[i_item] > self._T[i_parent]:
+        while i_parent and self._T[i_item] < self._T[i_parent]:
             self._swap(i_item, i_parent)
             i_item = i_parent
             i_parent = self.parent(i_item)
 
-    def remove_root(self) -> int:
+    def remove_root(self) -> Any:
         """
         To remove the root:
         * swap root with the last_element
