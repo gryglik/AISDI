@@ -88,7 +88,7 @@ to_print[start.y][start.x] = "X"
 
 node = end
 while node != start:
-    print(node)
+    # print(node)
     if board[node.y][node.x]:
         to_print[node.y][node.x] = board[node.y][node.x]
     else:
