@@ -9,19 +9,24 @@ parser.add_argument('program_path', type=str)
 args = parser.parse_args()
 
 tape = list(args.tape)
+print(tape)
 program = {}
 with open(args.program_path) as fp:
     for line in fp:
         line_list = line.strip().split(' ')
         if line_list[0] not in program:
             program[line_list[0]] = dict()
+        print(line_list)
         program[line_list[0]][line_list[1]] = line_list[2:]
 
+print(program)
 current_state = "init"
 current_symbol = 0
 
-while current_state != "halt":
+while not current_state.startswith("halt"):
     new_symbol, direction, new_state = program[current_state][tape[current_symbol]]
+    print(''.join(tape) + " " + current_state)
+    print(' ' * current_symbol + '^')
     tape[current_symbol] = new_symbol
     if direction == "R":
         if current_symbol == len(tape) - 1:
@@ -33,5 +38,7 @@ while current_state != "halt":
         else:
             current_symbol -= 1
     current_state = new_state
-    print(''.join(tape) + " " + current_state)
-    print(' ' * current_symbol + '^')
+
+
+print(''.join(tape) + " " + current_state)
+print(' ' * current_symbol + '^')
