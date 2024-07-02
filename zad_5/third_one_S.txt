@@ -1,0 +1,8 @@
+init 1 1 R one
+init 0 0 R init
+init S S R init
+one 1 1 R two
+one 0 0 R init
+two 1 S R init
+two 0 0 R init
+init _ _ * haltOK
