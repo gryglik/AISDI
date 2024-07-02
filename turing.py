@@ -9,17 +9,17 @@ parser.add_argument('program_path', type=str)
 args = parser.parse_args()
 
 tape = list(args.tape)
-print(tape)
+# print(tape)
 program = {}
 with open(args.program_path) as fp:
     for line in fp:
         line_list = line.strip().split(' ')
         if line_list[0] not in program:
             program[line_list[0]] = dict()
-        print(line_list)
+        # print(line_list)
         program[line_list[0]][line_list[1]] = line_list[2:]
 
-print(program)
+# print(program)
 current_state = "init"
 current_symbol = 0
 
